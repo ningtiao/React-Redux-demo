@@ -3,7 +3,7 @@ import "antd/dist/antd.css";
 import { Button, Input, List } from 'antd';
 import { SliderContainer } from './style';
 import store from '../../store/index'
-
+import { CHANGE_INPUT, ADD_ITEM, DEL_ITEM } from '../../store/actionTypes'
 class Index extends Component {
     constructor(props) {
         super(props)
@@ -26,7 +26,7 @@ class Index extends Component {
                         bordered
                         dataSource={this.state.list}
                         renderItem={(item, index) => (
-                            <List.Item classname="list-item">
+                            <List.Item className="list-item">
                              <div className='flex-item'>
                                 {item}
                              </div>
@@ -45,7 +45,7 @@ class Index extends Component {
     inputChangeValue(e) {
         console.log(e.target.value)
         const action = {
-            type: 'changeInput',
+            type: CHANGE_INPUT,
             value: e.target.value
         }
         store.dispatch(action)
@@ -53,14 +53,14 @@ class Index extends Component {
 
     addItem () {
         const action = {
-            type: 'addItem'
+            type: ADD_ITEM
         }
         store.dispatch(action)
     }
 
     delItem (index) {
         const action = {
-            type: 'deleleItem',
+            type: DEL_ITEM,
             index
         }
         store.dispatch(action)
