@@ -13,6 +13,10 @@ export const SliderContainer = styled.div`
         .list-content{
             margin: 10px;
             width: 300px;
+            .list-item{
+                display:flex;
+                justify-content: space-between;
+            }
         }
     }
 `

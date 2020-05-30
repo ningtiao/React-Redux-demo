@@ -4,13 +4,14 @@ import { Button, Input, List } from 'antd';
 import { SliderContainer } from './style';
 import store from '../../store/index'
 
-export default class Index extends Component {
+class Index extends Component {
     constructor(props) {
         super(props)
         this.state = store.getState()
         this.changeInputValue = this.changeInputValue.bind(this)
         this.storeChange = this.storeChange.bind(this)
         this.addList = this.addList.bind(this)
+        // this.delItem = this.delItem.bind(this)
         store.subscribe(this.storeChange)
     }
     render() {
@@ -29,7 +30,13 @@ export default class Index extends Component {
                     <div className="list-content">
                         <List bordered
                             dataSource={this.state.list}
-                            renderItem={item => (<List.Item>{item}</List.Item>)}
+                            renderItem={(item, index) => (<List.Item clasname="list-item">
+                            <div className='flex-item'>
+                                {item}
+                            </div>
+                            <div className='flex-item'>
+                                <Button type="primary" danger onClick={this.delItem.bind(this, index)}>删除</Button></div>
+                            </List.Item>)}
                         />
                     </div>
                 </div>
@@ -46,8 +53,15 @@ export default class Index extends Component {
     }
     addList () {
         const action = {
-            type: 'addValue',
-            value: this.state.inputValue
+            type: 'addItem'
+        }
+        store.dispatch(action)
+    }
+    delItem (index) {
+        console.log(index)
+        const action = {
+            type: 'deleteItem',
+            index
         }
         store.dispatch(action)
     }
@@ -55,3 +69,5 @@ export default class Index extends Component {
         this.setState(store.getState())
     }
 }
+
+export default Index
