@@ -3,7 +3,7 @@ import "antd/dist/antd.css";
 import { Button, Input, List } from 'antd';
 import { SliderContainer } from './style';
 import store from '../../store/index'
-import { CHANGE_INPUT, ADD_ITEM, DEL_ITEM } from '../../store/actionTypes'
+import { changeInputAction, addItemAction, delItemAction } from '../../store/actionCreators'
 class Index extends Component {
     constructor(props) {
         super(props)
@@ -18,7 +18,7 @@ class Index extends Component {
             <SliderContainer>
                 <div className='app-container'>
                     <div className='header-content'>
-                        <Input placeolder="请输入内容" onChange={this.inputChangeValue} className='ant-form-input'/>
+                        <Input placeolder="请输入内容" value={this.state.inputValue} onChange={this.inputChangeValue} className='ant-form-input'/>
                         <Button type="primary" onClick={this.addItem}>新增</Button>
                     </div>
                     <div className="list-content">
@@ -43,26 +43,17 @@ class Index extends Component {
     }
 
     inputChangeValue(e) {
-        console.log(e.target.value)
-        const action = {
-            type: CHANGE_INPUT,
-            value: e.target.value
-        }
+        const action = changeInputAction(e.target.value)
         store.dispatch(action)
     }
 
     addItem () {
-        const action = {
-            type: ADD_ITEM
-        }
+        const action = addItemAction()
         store.dispatch(action)
     }
 
     delItem (index) {
-        const action = {
-            type: DEL_ITEM,
-            index
-        }
+        const action = delItemAction(index)
         store.dispatch(action)
     }
     storeChange() {
