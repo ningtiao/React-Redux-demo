@@ -16,7 +16,7 @@ class Index extends Component {
         return (
             <TodoList 
                 inputValue={this.state.inputValue}
-                changeInputValue={this.inputChangeValue}
+                inputChangeValue={this.inputChangeValue}
                 addItem={this.addItem}
                 list={this.state.list}
                 delItem={this.delItem}
@@ -25,6 +25,7 @@ class Index extends Component {
     }
 
     inputChangeValue(e) {
+        console.log(e.target.value)
         const action = changeInputAction(e.target.value)
         store.dispatch(action)
     }
