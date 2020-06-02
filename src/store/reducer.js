@@ -1,11 +1,7 @@
-import { CHANGE_INPUT, ADD_ITEM, DEL_ITEM } from './actionTypes'
+import { CHANGE_INPUT, ADD_ITEM, DEL_ITEM, GET_LIST } from './actionTypes'
 const defaultState = {
     inputValue: '大白菜',
-    list: [
-        '早上起床',
-        '中午吃饭',
-        '晚上睡觉'
-    ]
+    list: []
 }
 
 export default (state = defaultState, action) => {
@@ -29,5 +25,13 @@ export default (state = defaultState, action) => {
         newState.list.splice(action.index, 1)
         return newState
     }
+
+    if (action.type === GET_LIST) {
+        let newState = JSON.parse(JSON.stringify(state))
+        console.log(action, 'actionaction')
+        newState.list = action.data
+        return newState
+    }
+
     return state
 }
