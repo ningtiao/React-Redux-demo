@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import store from '../../store/index'
 import TodoList from '../../components/todoList'
-import { changeInputAction, addItemAction, delItemAction, getDatalist } from '../../store/actionCreators'
+import { changeInputAction, addItemAction, delItemAction, getToList } from '../../store/actionCreators'
 // import axios from 'axios'
 class Index extends Component {
     constructor(props) {
@@ -26,19 +26,7 @@ class Index extends Component {
     }
 
     componentDidMount() {
-        this.getList()
-    }
-
-    getList() {
-        // axios.get('https://www.easy-mock.com/mock/5cfcce489dc7c36bd6da2c99/xiaojiejie/getList').then((res) => {
-
-        // })
-        const data = [
-            '早上起床',
-            '中午吃饭',
-            '晚上睡觉'
-        ]
-        const action = getDatalist(data)
+        const action = getToList()
         store.dispatch(action)
     }
 
